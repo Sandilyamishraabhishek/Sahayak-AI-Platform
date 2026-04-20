@@ -1,73 +1,23 @@
-# React + TypeScript + Vite
+# 🌟 Sahayak AI Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sahayak AI is a next-generation, AI-powered smart resource allocation platform built to revolutionize how NGOs, volunteers, and donors respond to community needs and crisis situations. With a sleek, dark-themed glassmorphic UI, it streamlines operations to ensure help reaches exactly where it is needed most.
 
-Currently, two official plugins are available:
+## ✨ Key Features
+- **🤖 AI Priority Scoring:** Automatically evaluates and prioritizes crisis situations and resource requests based on urgency.
+- **🗺️ Interactive Live Mapping:** A fully dynamic map (powered by Leaflet) tracking the real-time locations of volunteers and reported crises.
+- **📊 Role-Based Dashboards:** Customized experiences tailored specifically for:
+  - **NGOs:** Monitor resource requests and dispatch teams.
+  - **Volunteers:** View assigned tasks, track real-time routes, and manage activities.
+  - **Owners/Donors:** Track donations, stock limits, and platform-wide metrics.
+  - **General Users:** Report crises and request emergency resources safely.
+- **📦 Smart Inventory Management:** Real-time monitoring of critical stock levels like food, water, and clothing.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 💻 Tech Stack
+- Frontend: React + TypeScript (Vite)
+- Real-time Mapping: Leaflet 
+- Styling: Modern CSS with Glassmorphism aesthetics
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Getting Started
+1. Clone the repository
+2. Install dependencies by running `npm install`
+3. Start the development server with `npm run dev`
