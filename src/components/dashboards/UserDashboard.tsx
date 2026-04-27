@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
-import { User, AlertCircle } from 'lucide-react';
+import { User, AlertCircle, MapPin } from 'lucide-react';
+import { calculateDistance } from '../../utils/auth';
 
 const UserDashboard: React.FC = () => {
-  const { stock } = useAppContext();
+  const { stock, currentUser } = useAppContext();
   const [requested, setRequested] = useState(false);
 
   const handleAidRequest = (e: React.FormEvent) => {
     e.preventDefault();
     setRequested(true);
   };
+
+  // Mock nearest volunteer slightly offset from user's live location
+  const mockVolunteer = { 
+      lat: (currentUser?.lat || 28.6139) + 0.015, 
+      lng: (currentUser?.lng || 77.2090) + 0.02 
+  };
+  
+  const distanceToVolunteer = (currentUser?.lat && currentUser?.lng) 
+    ? calculateDistance(currentUser.lat, currentUser.lng, mockVolunteer.lat, mockVolunteer.lng).toFixed(2)
+    : null;
 
   return (
     <div className="dashboard-content" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
@@ -22,6 +33,18 @@ const UserDashboard: React.FC = () => {
           <p style={{ color: 'var(--text-muted)', margin: 0 }}>View availability & request assistance</p>
         </div>
       </header>
+
+      {distanceToVolunteer && (
+          <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'linear-gradient(90deg, rgba(79, 70, 229, 0.1), rgba(147, 51, 234, 0.1))', border: '1px solid rgba(147, 51, 234, 0.3)' }}>
+              <div style={{ padding: '0.75rem', background: 'rgba(147, 51, 234, 0.2)', borderRadius: '50%', color: '#C084FC' }}>
+                  <MapPin size={24} />
+              </div>
+              <div>
+                  <h3 style={{ margin: '0 0 0.25rem 0', color: '#fff' }}>Nearest Volunteer is {distanceToVolunteer} km away</h3>
+                  <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.9rem' }}>Based on your live registration coordinates: {currentUser?.lat?.toFixed(3)}, {currentUser?.lng?.toFixed(3)}</p>
+              </div>
+          </div>
+      )}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
         

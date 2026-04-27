@@ -1,12 +1,13 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Settings2, Activity, Sparkles, ShieldCheck, Package } from 'lucide-react';
+import { Brain, Settings2, Activity, Sparkles, ShieldCheck, Package, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean, setAiEnabled: (v: boolean) => void }) {
   const [scrolled, setScrolled] = useState(false);
-  const { stock, role } = useAppContext();
+  const { stock, role, setRole } = useAppContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,11 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    setRole(null);
+    navigate('/');
+  };
 
   return (
     <motion.header
@@ -80,6 +86,27 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
             <Link to={role ? "/dashboard" : "/login"} className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}>
                <Activity size={16} /> {role ? 'Dashboard' : 'Login'}
             </Link>
+
+            {role && (
+              <button 
+                onClick={handleLogout}
+                className="nav-link" 
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '0.5rem', 
+                  fontSize: '0.95rem',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'inherit',
+                  cursor: 'pointer',
+                  padding: 0,
+                  fontFamily: 'inherit'
+                }}
+              >
+                <LogOut size={16} /> Logout
+              </button>
+            )}
           </div>
 
           <motion.div 

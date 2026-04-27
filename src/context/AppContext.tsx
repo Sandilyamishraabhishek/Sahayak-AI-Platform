@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { getSessionUser, clearSession } from '../utils/auth';
+import type { UserData } from '../utils/auth';
 
 export type Role = 'user' | 'ngo' | 'owner' | 'volunteer' | null;
 
@@ -11,6 +13,8 @@ interface Stock {
 interface AppContextType {
   role: Role;
   setRole: (role: Role) => void;
+  currentUser: UserData | null;
+  setCurrentUser: (user: UserData | null) => void;
   stock: Stock;
   updateStock: (type: keyof Stock, amount: number) => void;
   logout: () => void;
@@ -19,11 +23,21 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
   const [role, setRole] = useState<Role>(null);
   const [stock, setStock] = useState<Stock>({
     food: 500,    // Initial mock data
     clothes: 300, // Initial mock data
   });
+
+  useEffect(() => {
+    // Check for existing JWT session on app load
+    const user = getSessionUser();
+    if (user) {
+      setCurrentUser(user);
+      setRole(user.role);
+    }
+  }, []);
 
   const updateStock = (type: keyof Stock, amount: number) => {
     setStock((prev) => ({
@@ -32,10 +46,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }));
   };
 
-  const logout = () => setRole(null);
+  const logout = () => {
+    setRole(null);
+    setCurrentUser(null);
+    clearSession();
+  };
 
   return (
-    <AppContext.Provider value={{ role, setRole, stock, updateStock, logout }}>
+    <AppContext.Provider value={{ role, setRole, currentUser, setCurrentUser, stock, updateStock, logout }}>
       {children}
     </AppContext.Provider>
   );

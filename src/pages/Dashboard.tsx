@@ -14,19 +14,26 @@ const Dashboard: React.FC = () => {
     return <Navigate to="/login" replace />;
   }
 
-  // Render specific dashboard based on role
-  switch (role) {
-    case 'owner':
-      return <OwnerDashboard />;
-    case 'ngo':
-      return <NGODashboard />;
-    case 'volunteer':
-      return <VolunteerDashboard />;
-    case 'user':
-      return <UserDashboard />;
-    default:
-      return <Navigate to="/login" replace />;
-  }
+  const renderDashboard = () => {
+    switch (role) {
+      case 'owner':
+        return <OwnerDashboard />;
+      case 'ngo':
+        return <NGODashboard />;
+      case 'volunteer':
+        return <VolunteerDashboard />;
+      case 'user':
+        return <UserDashboard />;
+      default:
+        return <Navigate to="/login" replace />;
+    }
+  };
+
+  return (
+    <div style={{ paddingTop: '100px' }}>
+      {renderDashboard()}
+    </div>
+  );
 };
 
 export default Dashboard;
