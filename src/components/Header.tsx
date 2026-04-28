@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Settings2, Activity, Sparkles, ShieldCheck, Package, LogOut } from 'lucide-react';
+import { Settings2, Activity, Sparkles, ShieldCheck, Package, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
@@ -45,37 +45,14 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <motion.div 
             className="logo-container"
-            whileHover={{ scale: 1.02 }}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}
+            whileHover={{ scale: 1.05 }}
+            style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
           >
-            <div style={{
-              background: 'linear-gradient(135deg, var(--primary-blue), var(--primary-purple))',
-              padding: '10px',
-              borderRadius: '14px',
-              display: 'flex',
-              boxShadow: '0 0 25px rgba(139, 92, 246, 0.5)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <motion.div
-                 animate={{ rotate: 360 }}
-                 transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                 style={{
-                   position: 'absolute',
-                   inset: -20,
-                   background: 'conic-gradient(from 0deg, transparent, rgba(255,255,255,0.4), transparent)',
-                 }}
-              />
-              <motion.div
-                 animate={{ scale: [1, 1.1, 1] }}
-                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Brain size={26} color="white" style={{ position: 'relative', zIndex: 2 }} />
-              </motion.div>
-            </div>
-            <h1 style={{ fontSize: '1.75rem', margin: 0, letterSpacing: '-0.5px', textShadow: '0 0 20px rgba(255,255,255,0.1)' }}>
-              Sahayak <span className="gradient-text">AI</span>
-            </h1>
+            <img 
+              src="/logo.png" 
+              alt="Sahayak AI Logo" 
+              style={{ height: '50px', objectFit: 'contain' }} 
+            />
           </motion.div>
         </Link>
 
