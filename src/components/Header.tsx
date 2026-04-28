@@ -43,35 +43,52 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
     >
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <motion.div 
+          <motion.div
             className="logo-container"
             whileHover={{ scale: 1.05 }}
             style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
           >
-            <img 
-              src="/logo.png" 
-              alt="Sahayak AI Logo" 
-              style={{ height: '50px', objectFit: 'contain' }} 
-            />
+            <div style={{
+              height: '70px',
+              width: '70px',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              background: '#05060a',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 16px rgba(0, 210, 255, 0.25)',
+            }}>
+              <img
+                src="/logo.png"
+                alt="Sahayak AI Logo"
+                style={{
+                  height: '68px',
+                  width: '68px',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                }}
+              />
+            </div>
           </motion.div>
         </Link>
 
         <nav style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
             <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}><Sparkles size={16} /> Home</Link>
-            
+
             <Link to={role ? "/dashboard" : "/login"} className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}>
-               <Activity size={16} /> {role ? 'Dashboard' : 'Login'}
+              <Activity size={16} /> {role ? 'Dashboard' : 'Login'}
             </Link>
 
             {role && (
-              <button 
+              <button
                 onClick={handleLogout}
-                className="nav-link" 
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '0.5rem', 
+                className="nav-link"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
                   fontSize: '0.95rem',
                   background: 'transparent',
                   border: 'none',
@@ -86,46 +103,46 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
             )}
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ height: 0 }}
             animate={{ height: 30 }}
             transition={{ delay: 0.5 }}
-            style={{ width: '1px', background: 'var(--border-color)', margin: '0 0.5rem' }} 
+            style={{ width: '1px', background: 'var(--border-color)', margin: '0 0.5rem' }}
           />
 
           {/* Platform Stock Snippet */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             title="Global Resource Stock"
             style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.03)', padding: '0.5rem 1rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}
           >
-             <Package size={16} color="#34D399" />
-             <div style={{ fontSize: '0.85rem' }}>
-                <span style={{ color: '#34D399', fontWeight: 'bold' }}>{stock.food}</span> Food
-                <span style={{ margin: '0 8px', color: 'rgba(255,255,255,0.2)' }}>|</span>
-                <span style={{ color: '#60A5FA', fontWeight: 'bold' }}>{stock.clothes}</span> Clothes
-             </div>
+            <Package size={16} color="#34D399" />
+            <div style={{ fontSize: '0.85rem' }}>
+              <span style={{ color: '#34D399', fontWeight: 'bold' }}>{stock.food}</span> Food
+              <span style={{ margin: '0 8px', color: 'rgba(255,255,255,0.2)' }}>|</span>
+              <span style={{ color: '#60A5FA', fontWeight: 'bold' }}>{stock.clothes}</span> Clothes
+            </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ height: 0 }}
             animate={{ height: 30 }}
             transition={{ delay: 0.5 }}
-            style={{ width: '1px', background: 'var(--border-color)', margin: '0 0.5rem' }} 
+            style={{ width: '1px', background: 'var(--border-color)', margin: '0 0.5rem' }}
           />
-          
-          <motion.div 
-            className="glass" 
+
+          <motion.div
+            className="glass"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, type: "spring" }}
             whileHover={{ scale: 1.02, boxShadow: '0 0 25px rgba(139, 92, 246, 0.2)' }}
-            style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '0.75rem', 
-              padding: '0.6rem 1.2rem', 
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              padding: '0.6rem 1.2rem',
               borderRadius: '30px',
               border: aiEnabled ? '1px solid rgba(139, 92, 246, 0.3)' : '1px solid var(--border-color)',
               background: aiEnabled ? 'rgba(139, 92, 246, 0.05)' : 'var(--bg-card)',
@@ -150,9 +167,9 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
               </motion.div>
             )}
 
-            <span style={{ 
-              fontSize: '0.875rem', 
-              fontWeight: 600, 
+            <span style={{
+              fontSize: '0.875rem',
+              fontWeight: 600,
               color: aiEnabled ? 'var(--primary-purple)' : 'var(--text-muted)',
               textShadow: aiEnabled ? '0 0 10px rgba(139, 92, 246, 0.4)' : 'none',
               transition: 'all 0.3s ease'
@@ -176,7 +193,7 @@ export default function Header({ aiEnabled, setAiEnabled }: { aiEnabled: boolean
               <motion.div
                 layout
                 initial={false}
-                animate={{ 
+                animate={{
                   x: aiEnabled ? 24 : 2,
                 }}
                 transition={{ type: 'spring', stiffness: 500, damping: 30 }}
